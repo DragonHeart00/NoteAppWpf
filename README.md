@@ -1,4 +1,4 @@
-# NoteAppWpf
-get started with model package;
-create Note class, Notebook class and User class;
-used sqlite by install sqlite-net-pcl package;
+# NoteAppWpf <br />
+get started with model package <br />
+create Note class, Notebook class and User class <br />
+used sqlite by install sqlite-net-pcl package <br />
