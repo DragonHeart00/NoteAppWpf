@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:NoteApp.UC"
              mc:Ignorable="d" 
              d:DesignHeight="240" d:DesignWidth="198">
+
+    <Border  CornerRadius="10">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -49,17 +51,20 @@
 
         <Button Content="/"
                 Grid.Row="1"
+                Click="OperationButton_Click"
                 x:Name="divisionButton" 
                 Style="{StaticResource operatorButtonStyle}"
                 Grid.Column="3"/>
 
         <Button Content="7"
+                Click="NumberButton_Click"
                 Grid.Row="2"
                 Style="{StaticResource numberButtonStyle}"
                 x:Name="sevenButton" 
                 />
 
         <Button Content="8"
+                Click="NumberButton_Click"
                 x:Name="eightButton" 
                 Style="{StaticResource numberButtonStyle}"
                 Grid.Row="2"
@@ -67,6 +72,7 @@
                 />
 
         <Button Content="9"
+                Click="NumberButton_Click"
                 Style="{StaticResource numberButtonStyle}"
                 Grid.Row="2"
                 x:Name="nineButton" 
@@ -74,6 +80,7 @@
                 />
 
         <Button Content="*"
+                Click="OperationButton_Click"
                 Grid.Row="2"
                 x:Name="multiplicationButton" 
                 Style="{StaticResource operatorButtonStyle}"
@@ -81,12 +88,14 @@
                 />
 
         <Button Content="4"
+                Click="NumberButton_Click"
                 Style="{StaticResource numberButtonStyle}"
                 Grid.Row="3"
                 x:Name="fourButton" 
                 />
 
         <Button Content="5"
+                Click="NumberButton_Click"
                 Style="{StaticResource numberButtonStyle}"
                 Grid.Row="3"
                 x:Name="fiveButton" 
@@ -94,6 +103,7 @@
                 />
 
         <Button Content="6"
+                Click="NumberButton_Click"
                 Style="{StaticResource numberButtonStyle}"
                 Grid.Row="3"
                 x:Name="sixButton" 
@@ -101,6 +111,7 @@
                 />
 
         <Button Content="-"
+                Click="OperationButton_Click"
                 Grid.Row="3"
                 x:Name="subtractionButton" 
                 Style="{StaticResource operatorButtonStyle}"
@@ -108,6 +119,7 @@
                 />
 
         <Button Content="1"
+                Click="NumberButton_Click"
                 Style="{StaticResource numberButtonStyle}"
                 Grid.Row="4"
                 x:Name="oneButton" 
@@ -115,6 +127,7 @@
                 />
 
         <Button Content="2"
+                Click="NumberButton_Click"
                 Style="{StaticResource numberButtonStyle}"
                 Grid.Row="4"
                 x:Name="twoButton" 
@@ -122,6 +135,7 @@
                 />
 
         <Button Content="3"
+                Click="NumberButton_Click"
                 Style="{StaticResource numberButtonStyle}"
                 Grid.Row="4"
                 x:Name="threeButton" 
@@ -129,6 +143,7 @@
                 />
 
         <Button Content="+"
+                Click="OperationButton_Click"
                 Grid.Row="4"
                 x:Name="additionButton"
                 Style="{StaticResource operatorButtonStyle}"
@@ -138,6 +153,7 @@
 
 
         <Button Content="0"
+                Click="NumberButton_Click"
                 Grid.Row="5"
                 x:Name="zeroButton"
                 Style="{StaticResource numberButtonStyle}"
@@ -148,6 +164,7 @@
 
 
         <Button Content=","
+                Click="PointButton_Click"
                 Grid.Row="5"
                 Style="{StaticResource numberButtonStyle}"
                 Grid.Column="2"
@@ -162,4 +179,5 @@
                 />
 
     </Grid>
+    </Border>
 </UserControl>

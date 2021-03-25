@@ -101,8 +101,8 @@
             </Grid.RowDefinitions>
 
             <RichTextBox x:Name="contentRichTextBox"   Grid.ColumnSpan="1" Grid.RowSpan="2"/>
-            <UC:CalculatorUC  VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1" Margin="0,0,5,15" Width="198" Height="240" />
-            <Calendar HorizontalAlignment="Right"  VerticalAlignment="Center" Width="184" Grid.Column="1" Margin="0,0,15,0" />
+            <UC:CalculatorUC  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1"  Width="170" Height="230" />
+            <Calendar HorizontalAlignment="Center"  VerticalAlignment="Center" Width="184" Grid.Column="1"  />
         </Grid>
 
 
