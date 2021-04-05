@@ -1,4 +1,5 @@
-﻿using NoteApp.Model;
+﻿using NoteApp.DB;
+using NoteApp.Model;
 using NoteApp.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,29 @@ namespace NoteApp.ViewModel
         {
             NewNotebookCommand = new NewNotebookCommand(this);
             NewNoteCommand = new NewNoteCommand(this);
+        }
+
+        //use it to created a new note by calling insert method from database class 
+        public void CreateNote(int notebookeId)
+        {
+            Note newNote = new Note()
+            {
+                NotebookId = notebookeId,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                Title = "New Note"
+            };
+            Database.Insert(newNote);
+        }
+
+        //use it to created a new notebook by calling insert method from database class 
+        public void CreateNotebook()
+        {
+            Notebook newNotebook = new Notebook()
+            {
+                Name = "New Notebook"
+            };
+            Database.Insert(newNotebook);
         }
     }
 }

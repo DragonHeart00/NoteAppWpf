@@ -28,7 +28,8 @@ namespace NoteApp.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-           //todo: create a new notebook
+            //todo: create a new notebook
+            Controller.CreateNotebook();
         }
     }
 }

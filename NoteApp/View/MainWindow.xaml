@@ -4,16 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NoteApp"
+        xmlns:viewmodel="clr-namespace:NoteApp.ViewModel"
         xmlns:UC="clr-namespace:NoteApp.UC" x:Class="NoteApp.MainWindow"
         mc:Ignorable="d"
         Title=" " Height="600" Width="1000"> <!-- todo add name of app in title filed -->
-    <DockPanel>
+    
+    
+    <!-- to bind view with view model -->
+    <Window.Resources>
+        <viewmodel:NotesController x:Key="viewModel"/>
+    </Window.Resources>
+    
+    <DockPanel DataContext="{StaticResource viewModel}">
 
         <!-- menu -->
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem Header="New Notebook"/>
-                <MenuItem Header="New Note"/>
+                <MenuItem Header="New Notebook"
+                          Command="{Binding NewNotebookCommand}"/>
+                <MenuItem Header="New Note"
+                          Command="{Binding NewNoteCommand}"
+                          CommandParameter="{Binding SelectedNotebook}"/>
                 <Separator/>
                 <MenuItem Header="Exit"
                           Click="MenuItem_Click"/>
