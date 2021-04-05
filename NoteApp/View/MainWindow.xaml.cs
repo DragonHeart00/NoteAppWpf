@@ -24,5 +24,12 @@ namespace NoteApp
         {
             InitializeComponent();
         }
+
+
+        //close the app 
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
