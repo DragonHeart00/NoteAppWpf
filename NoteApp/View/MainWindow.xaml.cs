@@ -71,5 +71,29 @@ namespace NoteApp
             fontFamilyComboBox.SelectedItem = contentRichTextBox.Selection.GetPropertyValue(Inline.FontFamilyProperty);
             fontSizeComboBox.Text = contentRichTextBox.Selection.GetPropertyValue(Inline.FontSizeProperty).ToString();
         }
+
+        private void italicButton_Click(object sender, RoutedEventArgs e)
+        {
+            bool isButtonEnabled = (sender as ToggleButton).IsChecked ?? false;
+
+            if (isButtonEnabled)
+                contentRichTextBox.Selection.ApplyPropertyValue(Inline.FontStyleProperty, FontStyles.Italic);
+            else
+                contentRichTextBox.Selection.ApplyPropertyValue(Inline.FontStyleProperty, FontStyles.Normal);
+        }
+
+        private void underlineButton_Click(object sender, RoutedEventArgs e)
+        {
+            bool isButtonEnabled = (sender as ToggleButton).IsChecked ?? false;
+
+            if (isButtonEnabled)
+                contentRichTextBox.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, TextDecorations.Underline);
+            else
+            {
+                TextDecorationCollection textDecorations;
+                (contentRichTextBox.Selection.GetPropertyValue(Inline.TextDecorationsProperty) as TextDecorationCollection).TryRemove(TextDecorations.Underline, out textDecorations);
+                contentRichTextBox.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, textDecorations);
+            }
+        }
     }
 }
