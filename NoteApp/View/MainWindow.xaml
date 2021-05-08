@@ -119,6 +119,7 @@
             <RichTextBox x:Name="contentRichTextBox"   
                          TextChanged="contentRichTextBox_TextChanged"
                          Grid.ColumnSpan="1" 
+                         SelectionChanged="contentRichTextBox_SelectionChanged"
                          Grid.RowSpan="2"/>
             
             <UC:CalculatorUC  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1"  Width="170" Height="230" />
