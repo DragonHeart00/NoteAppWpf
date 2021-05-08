@@ -45,12 +45,13 @@
         <ListView DockPanel.Dock="Left"
                   Background="#FF218080"
                   Width="160"
+                  SelectedValue="{Binding SelectedNotebook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding Notebooks}">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <TextBox Text="{Binding Name}" Foreground="White" Height="20"/>
+                        <TextBlock Text="{Binding Name}" Foreground="White" Height="20"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -65,7 +66,7 @@
                   ItemsSource="{Binding Notes}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBox Text="{Binding Title}" Foreground="White" Height="20"/>
+                    <TextBlock Text="{Binding Title}" Foreground="Black" Height="20"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
@@ -77,8 +78,9 @@
 
             <ToolBar>
                 <Button Content="Speech" Click="SpeechButton_Click"></Button>
-                <ToggleButton x:Name="blodButton">
-                    <TextBlock Text="B" FontWeight="Bold"/>
+                
+                <ToggleButton x:Name="blodButton" Click="blodButton_Click">
+                    <TextBlock Text="B" FontWeight="Bold" />
                 </ToggleButton>
 
                 <ToggleButton x:Name="italicButton" >
@@ -99,12 +101,13 @@
 
             </ToolBar>
         </ToolBarTray>
+        
+        
         <Grid Background="AliceBlue">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
-
             </Grid.ColumnDefinitions>
 
 
@@ -113,7 +116,11 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <RichTextBox x:Name="contentRichTextBox"   Grid.ColumnSpan="1" Grid.RowSpan="2"/>
+            <RichTextBox x:Name="contentRichTextBox"   
+                         TextChanged="contentRichTextBox_TextChanged"
+                         Grid.ColumnSpan="1" 
+                         Grid.RowSpan="2"/>
+            
             <UC:CalculatorUC  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1"  Width="170" Height="230" />
             <Calendar HorizontalAlignment="Center"  VerticalAlignment="Center" Width="184" Grid.Column="1"  />
         </Grid>
