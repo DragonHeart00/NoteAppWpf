@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:NoteApp"
         xmlns:viewmodel="clr-namespace:NoteApp.ViewModel"
         xmlns:UC="clr-namespace:NoteApp.UC" x:Class="NoteApp.MainWindow"
+        xmlns:uc="clr-namespace:NoteApp.UC"
         mc:Ignorable="d"
         Title=" " Height="600" Width="1000"> <!-- todo add name of app in title filed -->
     
@@ -50,9 +51,7 @@
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <TextBlock Text="{Binding Name}" Foreground="White" Height="20"/>
-                    </Grid>
+                    <uc:DisplayNotebook Notebook="{Binding}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
 
@@ -66,7 +65,7 @@
                   ItemsSource="{Binding Notes}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Title}" Foreground="Black" Height="20"/>
+                    <uc:DisplayNote Note="{Binding}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
