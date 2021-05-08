@@ -34,25 +34,23 @@
 
 
 
-
+        <!-- Status Bar down -->
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
                 <TextBlock x:Name="statusTextBox"/>
             </StatusBarItem>
         </StatusBar>
 
-
-
-
+        <!-- Notebooks List -->
         <ListView DockPanel.Dock="Left"
                   Background="#FF218080"
-                  Width="160">
+                  Width="160"
+                  ItemsSource="{Binding Notebooks}">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <TextBox Text="Note" Foreground="White" Height="20">
-                        </TextBox>
+                        <TextBox Text="{Binding Name}" Foreground="White" Height="20"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -60,22 +58,25 @@
         </ListView>
 
 
-
-
-
+        <!-- Note List -->
         <ListView DockPanel.Dock="Left"
-                  Width="200" Background="AliceBlue">
+                  Width="200" 
+                  Background="AliceBlue"
+                  ItemsSource="{Binding Notes}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-
+                    <TextBox Text="{Binding Title}" Foreground="White" Height="20"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
+
+
+        <!-- ToolBar Tray B U save ..... -->
         <ToolBarTray DockPanel.Dock="Top">
 
             <ToolBar>
-                <Button Content="Speech"></Button>
+                <Button Content="Speech" Click="SpeechButton_Click"></Button>
                 <ToggleButton x:Name="blodButton">
                     <TextBlock Text="B" FontWeight="Bold"/>
                 </ToggleButton>
