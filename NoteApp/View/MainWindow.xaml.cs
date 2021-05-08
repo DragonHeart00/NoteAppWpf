@@ -24,6 +24,11 @@ namespace NoteApp
         public MainWindow()
         {
             InitializeComponent();
+            var fontFamilies = Fonts.SystemFontFamilies.OrderBy(f => f.Source);
+            fontFamilyComboBox.ItemsSource = fontFamilies;
+
+            List<double> fontSizes = new List<double> { 8, 9, 10, 11, 12, 14, 16, 28, 48, 72 };
+            fontSizeComboBox.ItemsSource = fontSizes;
         }
 
 
@@ -35,7 +40,7 @@ namespace NoteApp
 
         private void SpeechButton_Click(object sender, RoutedEventArgs e)
         {
-
+            //todo by azure portal
         }
 
    
@@ -94,6 +99,21 @@ namespace NoteApp
                 (contentRichTextBox.Selection.GetPropertyValue(Inline.TextDecorationsProperty) as TextDecorationCollection).TryRemove(TextDecorations.Underline, out textDecorations);
                 contentRichTextBox.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, textDecorations);
             }
+        }
+
+        private void fontFamilyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (fontFamilyComboBox.SelectedItem != null)
+            {
+                contentRichTextBox.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, fontFamilyComboBox.SelectedItem);
+            }
+        }
+
+   
+
+        private void fontSizeComboBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            contentRichTextBox.Selection.ApplyPropertyValue(Inline.FontSizeProperty, fontSizeComboBox.Text);
         }
     }
 }
