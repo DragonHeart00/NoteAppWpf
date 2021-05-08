@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NoteApp"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:viewmodel="clr-namespace:NoteApp.ViewModel"
         xmlns:UC="clr-namespace:NoteApp.UC" x:Class="NoteApp.MainWindow"
         xmlns:uc="clr-namespace:NoteApp.UC"
@@ -63,7 +64,14 @@
                             </uc:DisplayNotebook.ContextMenu>
                         </uc:DisplayNotebook>
                         <TextBox Text="{Binding Name, Mode=TwoWay}" Height="20"
-                             Visibility="{Binding Source={StaticResource viewModel} , Path=IsVisible}"/>
+                             Visibility="{Binding Source={StaticResource viewModel} , Path=IsVisible}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:InvokeCommandAction Command="{Binding Source={StaticResource viewModel}, Path=EndEditingCommand }" 
+                                                           CommandParameter="{Binding}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
