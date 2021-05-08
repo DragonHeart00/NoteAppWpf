@@ -15,7 +15,7 @@
     <Window.Resources>
         <viewmodel:NotesController x:Key="viewModel"/>
     </Window.Resources>
-    
+
     <DockPanel DataContext="{StaticResource viewModel}">
 
         <!-- menu -->
@@ -34,7 +34,6 @@
 
 
 
-
         <!-- Status Bar down -->
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
@@ -42,6 +41,8 @@
             </StatusBarItem>
         </StatusBar>
 
+        
+        
         <!-- Notebooks List -->
         <ListView DockPanel.Dock="Left"
                   Background="#FF218080"
@@ -51,13 +52,25 @@
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <uc:DisplayNotebook Notebook="{Binding}"/>
+                    <Grid>
+                        <uc:DisplayNotebook Notebook="{Binding}">
+                            <uc:DisplayNotebook.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Rename"
+                                          Command="{Binding Source={StaticResource viewModel}, Path=EditCommand}"/>
+
+                                </ContextMenu>
+                            </uc:DisplayNotebook.ContextMenu>
+                        </uc:DisplayNotebook>
+                        <TextBox Text="{Binding Name, Mode=TwoWay}" Height="20"
+                             Visibility="{Binding Source={StaticResource viewModel} , Path=IsVisible}"/>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
         </ListView>
 
 
+        
         <!-- Note List -->
         <ListView DockPanel.Dock="Left"
                   Width="200" 
@@ -106,13 +119,14 @@
         </ToolBarTray>
         
         
+        
+        
         <Grid Background="AliceBlue">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
 
             <Grid.RowDefinitions >
                 <RowDefinition Height="*"/>
@@ -124,7 +138,6 @@
                          Grid.ColumnSpan="1" 
                          SelectionChanged="contentRichTextBox_SelectionChanged"
                          Grid.RowSpan="2"/>
-            
             <UC:CalculatorUC  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1"  Width="170" Height="230" />
             <Calendar HorizontalAlignment="Center"  VerticalAlignment="Center" Width="184" Grid.Column="1"  />
         </Grid>

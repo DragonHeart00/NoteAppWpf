@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace NoteApp.ViewModel
 {
@@ -32,15 +33,27 @@ namespace NoteApp.ViewModel
         }
 
 
-       
+        private Visibility isVisible;
+
+        public Visibility IsVisible
+        {
+            get { return isVisible; }
+            set
+            {
+                isVisible = value;
+                OnPropertyChanged("IsVisible");
+            }
+        }
 
 
 
         //call comamnd methods 
         public NewNotebookCommand NewNotebookCommand { get; set; }
         public NewNoteCommand NewNoteCommand { get; set; }
-        
-        
+       
+        public EditCommand EditCommand { get; set; }
+        public EndEditingCommand EndEditingCommand { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
 
@@ -49,8 +62,13 @@ namespace NoteApp.ViewModel
             NewNotebookCommand = new NewNotebookCommand(this);
             NewNoteCommand = new NewNoteCommand(this);
 
+            EditCommand = new EditCommand(this);
+            EndEditingCommand = new EndEditingCommand(this);
+
             Notebooks = new ObservableCollection<Notebook>();
             Notes = new ObservableCollection<Note>();
+
+            IsVisible = Visibility.Collapsed;
 
             GetNotebooks();
 
@@ -122,6 +140,24 @@ namespace NoteApp.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-       
+
+        public void StartEditing()
+        {
+            // todo start editing to true
+            IsVisible = Visibility.Visible;
+        }
+
+
+        public void StopEditing(Notebook notebook)
+        {
+            // todo stop editing to true
+            IsVisible = Visibility.Collapsed;
+            Database.Update(notebook);
+            GetNotebooks();
+
+        }
+        
+
+
     }
 }
