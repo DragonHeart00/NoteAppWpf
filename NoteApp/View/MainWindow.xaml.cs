@@ -1,4 +1,5 @@
 ﻿using NoteApp.DB;
+using NoteApp.View;
 using NoteApp.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,19 @@ namespace NoteApp
 
             List<double> fontSizes = new List<double> { 8, 9, 10, 11, 12, 14, 16, 28, 48, 72 };
             fontSizeComboBox.ItemsSource = fontSizes;
+        }
+
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+
+            if (string.IsNullOrEmpty(App.UserId))
+            {
+                LoginWindow loginWindow = new LoginWindow();
+                loginWindow.ShowDialog();
+
+                controller.GetNotebooks();
+            }
         }
 
 

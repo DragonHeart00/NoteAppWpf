@@ -121,7 +121,7 @@ namespace NoteApp.ViewModel
 
 
 
-        private void GetNotebooks()
+        public void GetNotebooks()
         {
             var notebooks = Database.Read<Notebook>();
 

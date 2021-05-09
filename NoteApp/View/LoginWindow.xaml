@@ -4,9 +4,39 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NoteApp.View"
+        xmlns:vm="clr-namespace:NoteApp.ViewModel"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="450" Width="800">
-    <Grid>
-        
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        Title="" Height="300" Width="300">
+
+    <!-- to bind view with view model -->
+    <Window.Resources>
+        <vm:LoginController x:Key="vm"/>
+    </Window.Resources>
+
+
+    <Grid DataContext="{StaticResource vm}">
+        <StackPanel Visibility="{Binding LogVisibility}">
+            <TextBlock Text="Register" Foreground="DodgerBlue" TextDecorations="Underline">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding ShowRegiserCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBlock>
+        </StackPanel>
+
+
+        <StackPanel  Visibility="{Binding RegisterVisibility}">
+            <TextBlock Text="Login" Foreground="DodgerBlue" TextDecorations="Underline">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding ShowRegiserCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBlock>
+        </StackPanel>
+
+
     </Grid>
 </Window>
