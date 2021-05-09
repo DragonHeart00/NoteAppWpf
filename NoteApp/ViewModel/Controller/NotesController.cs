@@ -22,15 +22,29 @@ namespace NoteApp.ViewModel
         public Notebook SelectedNotebook
         {
             get { return selectedNotebook; }
-            set 
-            { 
+            set
+            {
                 selectedNotebook = value;
-              
                 OnPropertyChanged("SelectedNotebook");
                 GetNotes();
-              
             }
         }
+
+
+
+        private Note selectedNote;
+
+        public Note SelectedNote
+        {
+            get { return selectedNote; }
+            set
+            {
+                selectedNote = value;
+                OnPropertyChanged("SelectedNote");
+                SelectedNoteChanged?.Invoke(this, new EventArgs());
+            }
+        }
+
 
 
         private Visibility isVisible;
@@ -55,7 +69,7 @@ namespace NoteApp.ViewModel
         public EndEditingCommand EndEditingCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
+        public event EventHandler SelectedNoteChanged;
 
         public NotesController()
         {

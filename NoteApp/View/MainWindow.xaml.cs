@@ -1,5 +1,8 @@
-﻿using System;
+﻿using NoteApp.DB;
+using NoteApp.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,14 +24,37 @@ namespace NoteApp
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        NotesController controller;
         public MainWindow()
         {
             InitializeComponent();
+
+            controller = Resources["viewModel"] as NotesController;
+            controller.SelectedNoteChanged += ViewModel_SelctedNoteChanged;
+
             var fontFamilies = Fonts.SystemFontFamilies.OrderBy(f => f.Source);
             fontFamilyComboBox.ItemsSource = fontFamilies;
 
             List<double> fontSizes = new List<double> { 8, 9, 10, 11, 12, 14, 16, 28, 48, 72 };
             fontSizeComboBox.ItemsSource = fontSizes;
+        }
+
+
+
+        private void ViewModel_SelctedNoteChanged(object sender, EventArgs e)
+        {
+            contentRichTextBox.Document.Blocks.Clear();
+            if (controller.SelectedNote != null)
+            {
+                if (!string.IsNullOrEmpty(controller.SelectedNote.FileLocation))
+                {
+                    FileStream fileStream = new FileStream(controller.SelectedNote.FileLocation, FileMode.Open);
+                    var contents = new TextRange(contentRichTextBox.Document.ContentStart, contentRichTextBox.Document.ContentEnd);
+                    contents.Load(fileStream, DataFormats.Rtf);
+                  
+                }
+            }
         }
 
 
@@ -114,6 +140,18 @@ namespace NoteApp
         private void fontSizeComboBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             contentRichTextBox.Selection.ApplyPropertyValue(Inline.FontSizeProperty, fontSizeComboBox.Text);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string rtfFile = System.IO.Path.Combine(Environment.CurrentDirectory, $"{controller.SelectedNote.Id}.rtf");
+            controller.SelectedNote.FileLocation = rtfFile;
+            Database.Update(controller.SelectedNote);
+
+            FileStream fileStream = new FileStream(rtfFile, FileMode.Create);
+            var contents = new TextRange(contentRichTextBox.Document.ContentStart, contentRichTextBox.Document.ContentEnd);
+            contents.Save(fileStream, DataFormats.Rtf);
+
         }
     }
 }

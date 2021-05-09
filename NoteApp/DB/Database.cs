@@ -12,7 +12,7 @@ namespace NoteApp.DB
     {
 
         //create and save local database sqlite
-        private static string databaseFile = Path.Combine(Environment.CurrentDirectory, "noteapp.db3");
+        private static string databaseFile = Path.Combine(Environment.CurrentDirectory, "noteappdemos.db3");
 
         //method to save data to database 
         public static bool Insert<T>(T item)
