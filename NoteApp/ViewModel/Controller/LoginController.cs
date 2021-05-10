@@ -1,4 +1,5 @@
-﻿using NoteApp.Model;
+﻿using NoteApp.DB;
+using NoteApp.Model;
 using NoteApp.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
@@ -197,9 +198,10 @@ namespace NoteApp.ViewModel
 
         }
 
-        public void Register()
+        public async void Register()
         {
-
+            //todo
+           await FirebaseAuth.Register(User);
         }
         private void OnPropertyChanged(string propertyName)
         {
