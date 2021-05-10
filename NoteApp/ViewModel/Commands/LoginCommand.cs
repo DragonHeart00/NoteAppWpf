@@ -25,7 +25,7 @@ namespace NoteApp.ViewModel.Commands
 
         public bool CanExecute(object parameter)
         {
-            User user = parameter as User;
+            User user = (parameter as User);
 
             if (user == null)
                 return false;
@@ -33,7 +33,11 @@ namespace NoteApp.ViewModel.Commands
                 return false;
             if (string.IsNullOrEmpty(user.Password))
                 return false;
+
             return true;
+
+          
+           
         }
 
         public void Execute(object parameter)

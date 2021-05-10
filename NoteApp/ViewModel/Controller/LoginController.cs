@@ -152,9 +152,10 @@ namespace NoteApp.ViewModel
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public RegisterCommand RegisterCommand { get; set; }
+        
         public LoginCommand LoginCommand { get; set; }
+        public RegisterCommand RegisterCommand { get; set; }
+        
         public ShowRegiserCommand ShowRegiserCommand { get; set; }
       
         
@@ -164,9 +165,8 @@ namespace NoteApp.ViewModel
             LogVisibility = Visibility.Visible;
             RegisterVisibility = Visibility.Collapsed;
 
-
-            RegisterCommand = new RegisterCommand(this);
             LoginCommand = new LoginCommand(this);
+            RegisterCommand = new RegisterCommand(this);
             ShowRegiserCommand = new ShowRegiserCommand(this);
            
             User = new User();
@@ -184,8 +184,9 @@ namespace NoteApp.ViewModel
             }
             else
             {
-                LogVisibility = Visibility.Visible;
                 RegisterVisibility = Visibility.Collapsed;
+                LogVisibility = Visibility.Visible;
+                
             }
         }
 
@@ -193,9 +194,9 @@ namespace NoteApp.ViewModel
         
 
 
-        public void Login()
+        public async void Login()
         {
-
+            await FirebaseAuth.Login(User);
         }
 
         public async void Register()

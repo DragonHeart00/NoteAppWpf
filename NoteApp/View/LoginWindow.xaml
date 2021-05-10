@@ -20,7 +20,7 @@
         <StackPanel Visibility="{Binding LogVisibility}" Margin="10">
             <!-- username, password and login button -->
             <TextBlock Text="Email: " Margin="5,0,5,0"/>
-            <TextBox Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,0"/>
+            <TextBox Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,0"/>
             <TextBlock Text="Password: " Margin="5,0,5,5"/>
             <TextBox Text="{Binding Password, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,0"/>
             <Button Command="{Binding LoginCommand}" 
