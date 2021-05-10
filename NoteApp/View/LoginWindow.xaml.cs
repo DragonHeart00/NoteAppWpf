@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NoteApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,21 @@ namespace NoteApp.View
     /// </summary>
     public partial class LoginWindow : Window
     {
+
+        LoginController controller;
         public LoginWindow()
         {
             InitializeComponent();
+
+            controller = Resources["vm"] as LoginController;
+            controller.Authenticated += Controller_Authenticated;
+
+
+        }
+
+        private void Controller_Authenticated(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

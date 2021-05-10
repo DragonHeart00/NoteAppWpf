@@ -152,6 +152,7 @@ namespace NoteApp.ViewModel
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler Authenticated;
         
         public LoginCommand LoginCommand { get; set; }
         public RegisterCommand RegisterCommand { get; set; }
@@ -196,13 +197,22 @@ namespace NoteApp.ViewModel
 
         public async void Login()
         {
-            await FirebaseAuth.Login(User);
+           bool result = await FirebaseAuth.Login(User);
+
+            if (result)
+            {
+                Authenticated?.Invoke(this, new EventArgs());
+            }
         }
 
         public async void Register()
         {
-            //todo
-           await FirebaseAuth.Register(User);
+            bool result = await FirebaseAuth.Register(User);
+
+            if (result)
+            {
+
+            }
         }
         private void OnPropertyChanged(string propertyName)
         {
