@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace NoteApp.DB
 {
@@ -13,10 +15,17 @@ namespace NoteApp.DB
 
         //create and save local database sqlite
         private static string databaseFile = Path.Combine(Environment.CurrentDirectory, "noteappdemos.db3");
+        private static string dbPath = "https://noteapp-10d20-default-rtdb.europe-west1.firebasedatabase.app/";
+
+
+
 
         //method to save data to database 
-        public static bool Insert<T>(T item)
+        public static async Task<bool> Insert<T>(T item)
         {
+
+            //sqldatabase
+            /*
             bool result = false;
 
             using (SQLiteConnection connection = new SQLiteConnection(databaseFile))
@@ -28,6 +37,27 @@ namespace NoteApp.DB
             }
 
             return result;
+            */
+
+            var jsonBody = JsonConvert.SerializeObject(item);
+            var content = new StringContent(jsonBody,Encoding.UTF8, "application/json");
+
+            using (var client = new HttpClient())
+            {
+                var result = await client.PostAsync($"{dbPath}{item.GetType().Name.ToLower()}.json",content);
+
+                if (result.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+
+
         }
 
 

@@ -94,7 +94,7 @@ namespace NoteApp.ViewModel
         
         
         //use it to created a new note by calling insert method from database class 
-        public void CreateNote(int notebookeId)
+        public async void CreateNote(int notebookeId)
         {
             Note newNote = new Note()
             {
@@ -103,18 +103,20 @@ namespace NoteApp.ViewModel
                 UpdatedAt = DateTime.Now,
                 Title = $"Note for {DateTime.Now.ToString()}"
             };
-            Database.Insert(newNote);
+            await Database.Insert(newNote);
             GetNotes();
         }
 
         //use it to created a new notebook by calling insert method from database class 
-        public void CreateNotebook()
+        public async void CreateNotebook()
         {
             Notebook newNotebook = new Notebook()
             {
-                Name = "New Notebook"
+                Name = "New Notebook",
+                //To customize notes for each user, by úsing user id. because each user has a unique id
+                UserId = App.UserId
             };
-            Database.Insert(newNotebook);
+            await Database.Insert(newNotebook);
             GetNotebooks();
         }
 
@@ -123,7 +125,7 @@ namespace NoteApp.ViewModel
 
         public void GetNotebooks()
         {
-            var notebooks = Database.Read<Notebook>();
+            var notebooks = Database.Read<Notebook>().Where(n => n.UserId == App.UserId).ToList();
 
             Notebooks.Clear();
 
