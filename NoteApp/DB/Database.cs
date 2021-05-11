@@ -63,8 +63,9 @@ namespace NoteApp.DB
 
 
         //method to update data in database like rename etc.
-        public static bool Update<T>(T item)
+        public static async Task<bool> Update<T>(T item) where T : HasId
         {
+            /*
             bool result = false;
 
             using (SQLiteConnection connection = new SQLiteConnection(databaseFile))
@@ -76,22 +77,62 @@ namespace NoteApp.DB
             }
 
             return result;
+
+            */
+
+            var jsonBody = JsonConvert.SerializeObject(item);
+            var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+
+            using (var client = new HttpClient())
+            {
+                var result = await client.PatchAsync($"{dbPath}{item.GetType().Name.ToLower()}/{item.Id}.json", content);
+
+                if (result.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
         }
 
         //method to remove item from database 
-        public static bool Delete<T>(T item)
+        public static async Task<bool> Delete<T>(T item) where T : HasId
         {
-            bool result = false;
+            /*
+             bool result = false;
 
-            using (SQLiteConnection connection = new SQLiteConnection(databaseFile))
+             using (SQLiteConnection connection = new SQLiteConnection(databaseFile))
+             {
+                 connection.CreateTable<T>();
+                 int rows = connection.Delete(item);
+                 if (rows > 0)
+                     result = true;
+             }
+
+             return result;
+
+             */
+
+
+            using (var client = new HttpClient())
             {
-                connection.CreateTable<T>();
-                int rows = connection.Delete(item);
-                if (rows > 0)
-                    result = true;
+                var result = await client.DeleteAsync($"{dbPath}{item.GetType().Name.ToLower()}/{item.Id}.json");
+
+                if (result.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
 
-            return result;
+
         }
 
 

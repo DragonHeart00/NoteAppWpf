@@ -165,11 +165,11 @@ namespace NoteApp.ViewModel
         }
 
 
-        public void StopEditing(Notebook notebook)
+        public async void StopEditing(Notebook notebook)
         {
             // todo stop editing to true
             IsVisible = Visibility.Collapsed;
-            Database.Update(notebook);
+            await Database.Update(notebook);
             GetNotebooks();
 
         }
