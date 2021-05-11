@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
 using System.Net.Http;
+using NoteApp.Model;
 
 namespace NoteApp.DB
 {
@@ -24,7 +25,7 @@ namespace NoteApp.DB
         public static async Task<bool> Insert<T>(T item)
         {
 
-            //sqldatabase
+            //sqlite database
             /*
             bool result = false;
 
@@ -95,8 +96,10 @@ namespace NoteApp.DB
 
 
         //method to show item from database like notebook or note
-        public static List<T> Read<T>() where T : new()
+        public static async Task<List<T>> Read<T>() where T : HasId
         {
+            //sqlite database
+            /*
             List<T> items;
 
             using (SQLiteConnection connection = new SQLiteConnection(databaseFile))
@@ -106,8 +109,40 @@ namespace NoteApp.DB
             }
 
             return items;
+      
+            */
+
+            //firebase
+            using (var client = new HttpClient())
+            {
+
+                //if (jsonResult != "null" && result.IsSuccessStatusCode)
+                var result = await client.GetAsync($"{dbPath}{typeof(T).Name.ToLower()}.json");
+                if (!result.IsSuccessStatusCode)
+                    return null;
+                var jsonResult = await result.Content.ReadAsStringAsync();
+
+                if (jsonResult != "null" && result.IsSuccessStatusCode)
+                {
+                    var objects = JsonConvert.DeserializeObject<Dictionary<string, T>>(jsonResult);
+
+                    List<T> list = new List<T>();
+                    foreach (var o in objects)
+                    {
+                        o.Value.Id = o.Key;
+                        list.Add(o.Value);
+                    }
+
+                    return list;
+                }
+                else
+                {
+                    return null;
+                }
+              
+
+            }
+          
         }
-
-
     }
 }

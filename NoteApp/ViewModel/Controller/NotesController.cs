@@ -88,24 +88,6 @@ namespace NoteApp.ViewModel
 
         }
 
-       
-        
-        
-        
-        
-        //use it to created a new note by calling insert method from database class 
-        public async void CreateNote(int notebookeId)
-        {
-            Note newNote = new Note()
-            {
-                NotebookId = notebookeId,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-                Title = $"Note for {DateTime.Now.ToString()}"
-            };
-            await Database.Insert(newNote);
-            GetNotes();
-        }
 
         //use it to created a new notebook by calling insert method from database class 
         public async void CreateNotebook()
@@ -122,27 +104,46 @@ namespace NoteApp.ViewModel
 
 
 
-
-        public void GetNotebooks()
+        //use it to created a new note by calling insert method from database class 
+        public async void CreateNote(string notebookeId)
         {
-            var notebooks = Database.Read<Notebook>().Where(n => n.UserId == App.UserId).ToList();
-
-            Notebooks.Clear();
-
-            foreach (var notebook in notebooks)
+            Note newNote = new Note()
             {
-                Notebooks.Add(notebook);
-            }
+                NotebookId = notebookeId,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                Title = $"Note for {DateTime.Now.ToString()}"
+            };
+            await Database.Insert(newNote);
+            GetNotes();
         }
 
-        private void GetNotes()
+      
+
+
+
+
+        public async void GetNotebooks()
         {
-            if (selectedNotebook != null)
+            try
             {
-                var notes = Database.Read<Note>().Where(n => n.NotebookId == SelectedNotebook.Id).ToList();
+                var notebooks = (await Database.Read<Notebook>()).Where(n => n.UserId == App.UserId).ToList();
+                Notebooks.Clear();
+                foreach (var notebook in notebooks)
+                {
+                    Notebooks.Add(notebook);
+                }
+            }
+            catch (ArgumentNullException) { }
+        }
+
+        private async void GetNotes()
+        {
+            if (SelectedNotebook != null)
+            {
+                var notes = (await Database.Read<Note>()).Where(n => n.NotebookId == SelectedNotebook.Id).ToList();
 
                 Notes.Clear();
-
                 foreach (var note in notes)
                 {
                     Notes.Add(note);
