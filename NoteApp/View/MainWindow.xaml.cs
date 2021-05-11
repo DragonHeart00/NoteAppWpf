@@ -156,11 +156,11 @@ namespace NoteApp
             contentRichTextBox.Selection.ApplyPropertyValue(Inline.FontSizeProperty, fontSizeComboBox.Text);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             string rtfFile = System.IO.Path.Combine(Environment.CurrentDirectory, $"{controller.SelectedNote.Id}.rtf");
             controller.SelectedNote.FileLocation = rtfFile;
-            Database.Update(controller.SelectedNote);
+            await Database.Update(controller.SelectedNote);
 
             FileStream fileStream = new FileStream(rtfFile, FileMode.Create);
             var contents = new TextRange(contentRichTextBox.Document.ContentStart, contentRichTextBox.Document.ContentEnd);

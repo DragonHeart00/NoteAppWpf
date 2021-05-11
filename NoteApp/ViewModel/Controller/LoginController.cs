@@ -211,7 +211,7 @@ namespace NoteApp.ViewModel
 
             if (result)
             {
-
+                Authenticated?.Invoke(this, new EventArgs());
             }
         }
         private void OnPropertyChanged(string propertyName)

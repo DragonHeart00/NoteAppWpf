@@ -27,6 +27,12 @@
                 <MenuItem Header="New Note"
                           Command="{Binding NewNoteCommand}"
                           CommandParameter="{Binding SelectedNotebook}"/>
+                <MenuItem Header="Delete"
+                          Command="{Binding DeleteCommand}"
+                          CommandParameter="{Binding SelectedNotebook}"/>
+                <MenuItem Header="Rename Notbook"
+                          Command="{Binding EditCommand}"
+                          CommandParameter="{Binding SelectedNotebook}"/>
                 <Separator/>
                 <MenuItem Header="Exit"
                           Click="MenuItem_Click"/>
@@ -59,7 +65,7 @@
                                 <ContextMenu>
                                     <MenuItem Header="Rename"
                                           Command="{Binding Source={StaticResource viewModel}, Path=EditCommand}"/>
-
+                                  
                                 </ContextMenu>
                             </uc:DisplayNotebook.ContextMenu>
                         </uc:DisplayNotebook>
@@ -69,6 +75,7 @@
                                 <i:EventTrigger EventName="LostFocus">
                                     <i:InvokeCommandAction Command="{Binding Source={StaticResource viewModel}, Path=EndEditingCommand }" 
                                                            CommandParameter="{Binding}"/>
+                                
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </TextBox>

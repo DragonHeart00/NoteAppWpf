@@ -27,6 +27,9 @@ namespace NoteApp.ViewModel
                 selectedNotebook = value;
                 OnPropertyChanged("SelectedNotebook");
                 GetNotes();
+               
+
+
             }
         }
 
@@ -65,8 +68,11 @@ namespace NoteApp.ViewModel
         public NewNotebookCommand NewNotebookCommand { get; set; }
         public NewNoteCommand NewNoteCommand { get; set; }
        
+        public DeleteCommand DeleteCommand { get; set; }
         public EditCommand EditCommand { get; set; }
         public EndEditingCommand EndEditingCommand { get; set; }
+
+       
 
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler SelectedNoteChanged;
@@ -78,6 +84,7 @@ namespace NoteApp.ViewModel
 
             EditCommand = new EditCommand(this);
             EndEditingCommand = new EndEditingCommand(this);
+            DeleteCommand = new DeleteCommand(this);
 
             Notebooks = new ObservableCollection<Notebook>();
             Notes = new ObservableCollection<Note>();
@@ -160,21 +167,30 @@ namespace NoteApp.ViewModel
 
         public void StartEditing()
         {
-            // todo start editing to true
+          
             IsVisible = Visibility.Visible;
         }
 
 
         public async void StopEditing(Notebook notebook)
         {
-            // todo stop editing to true
+        
             IsVisible = Visibility.Collapsed;
             await Database.Update(notebook);
             GetNotebooks();
 
         }
-        
 
+
+
+        // not use it yet 
+        public async void DeleteNotebook(Notebook notebook)
+        {
+            // todo 
+            await Database.Delete(notebook);
+            GetNotebooks();
+
+        }
 
     }
 }
