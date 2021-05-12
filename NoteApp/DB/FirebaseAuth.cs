@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace NoteApp.DB
 {
-    class FirebaseAuth
+    public class FirebaseAuth
     {
         private static string api_key = "AIzaSyASyyGlB5Fm6sCqkjuCHKTmKeQi5vQJjNg";
 
