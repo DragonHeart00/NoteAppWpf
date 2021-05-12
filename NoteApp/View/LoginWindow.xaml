@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Background="#FF218080"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        Title="" Height="300" Width="300">
+        Title="" Height="501" Width="357">
 
     <!-- to bind view with view model -->
     <Window.Resources>
@@ -18,17 +18,34 @@
     <!-- Login -->
     <Grid DataContext="{StaticResource vm}">
         <StackPanel Visibility="{Binding LogVisibility}" Margin="10">
+
+            <Image x:Name="imageId" 
+               Height="167" 
+               HorizontalAlignment="Center"
+               VerticalAlignment="Top" 
+               Width="168" 
+               Source="/View/login-shield.png" Grid.ColumnSpan="2"/>
             <!-- username, password and login button -->
-            <TextBlock Text="Email: " Margin="5,0,5,0"/>
-            <TextBox Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,0"/>
-            <TextBlock Text="Password: " Margin="5,0,5,5"/>
-            <TextBox Text="{Binding Password, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,0"/>
+            <TextBlock Text="Email: " 
+                       Margin="5,0,5,0" 
+                       FontWeight="Bold" 
+                       FontSize="14" Foreground="White"/>
+            
+            <TextBox Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,0"  Height="30" />
+            <TextBlock Text="Password: " Margin="5,0,5,5" FontWeight="Bold" 
+                       FontSize="14" Foreground="White"/>
+            <TextBox Text="{Binding Password, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,0"  Height="30"/>
             <Button Command="{Binding LoginCommand}" 
                     Content="Login"
                     FontSize="14"
                     CommandParameter="{Binding User}"
-                    Margin="5,10,5,0" Height="24"/>
-            <TextBlock Text="Register" Foreground="#FF97FF80" TextDecorations="Underline" HorizontalAlignment="Center">
+                    Margin="5,10,5,0"   
+                    Width="75" 
+                    Height="30" 
+                    Background="#FF0789E1" 
+                    Foreground="#FFC5B7B7" />
+            
+            <TextBlock Text="Register" Foreground="#FF97FF80" TextDecorations="Underline" HorizontalAlignment="Center" Margin="5,10,5,0">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseLeftButtonDown">
                     <i:InvokeCommandAction Command="{Binding ShowRegiserCommand}"/>
@@ -43,22 +60,31 @@
         <!-- Register -->
         <StackPanel  Visibility="{Binding RegisterVisibility}" Margin="10">
             <!-- username, Name, Lastname, password, ConfirmPassword and Register button -->
-            <TextBlock Text="Email: " Margin="5,0,5,0"/>
-            <TextBox Text="{Binding Username, Mode=TwoWay}" Margin="5,0,5,0"/>
-            <TextBlock Text="Name: " Margin="5,0,5,5"/>
-            <TextBox Text="{Binding Name, Mode=TwoWay}" Margin="5,0,5,0"/>
-            <TextBlock Text="Lastname: " Margin="5,0,5,5"/>
-            <TextBox Text="{Binding Lastname, Mode=TwoWay}" Margin="5,0,5,0"/>
-            <TextBlock Text="Password: " Margin="5,0,5,5"/>
-            <TextBox Text="{Binding Password, Mode=TwoWay}" Margin="5,0,5,0"/>
-            <TextBlock Text="Confirm Password: " Margin="5,0,5,5"/>
-            <TextBox Text="{Binding ConfirmPassword, Mode=TwoWay}" Margin="5,0,5,0"/>
+            <TextBlock Text="Email: " Margin="5,0,5,0" FontWeight="Bold" 
+                       FontSize="14" Foreground="White"/>
+            <TextBox Text="{Binding Username, Mode=TwoWay}" Margin="5,0,5,0"  Height="30"/>
+            <TextBlock Text="Name: " Margin="5,0,5,5" FontWeight="Bold" 
+                       FontSize="14" Foreground="White"/>
+            <TextBox Text="{Binding Name, Mode=TwoWay}" Margin="5,0,5,0"  Height="30"/>
+            <TextBlock Text="Lastname: " Margin="5,0,5,5" FontWeight="Bold" 
+                       FontSize="14" Foreground="White"/>
+            <TextBox Text="{Binding Lastname, Mode=TwoWay}" Margin="5,0,5,0"  Height="30"/>
+            <TextBlock Text="Password: " Margin="5,0,5,5" FontWeight="Bold" 
+                       FontSize="14" Foreground="White"/>
+            <TextBox Text="{Binding Password, Mode=TwoWay}" Margin="5,0,5,0"  Height="30"/>
+            <TextBlock Text="Confirm Password: " Margin="5,0,5,5" FontWeight="Bold" 
+                       FontSize="14" Foreground="White"/>
+            <TextBox Text="{Binding ConfirmPassword, Mode=TwoWay}" Margin="5,0,5,0"  Height="30"/>
             <Button Command="{Binding RegisterCommand}" 
                     Content="Register"
                     FontSize="14"
                     CommandParameter="{Binding User}"
-                    Margin="5,10,5,0" Height="30"/>
-            <TextBlock Text="Login" Foreground="#FF97FF80" TextDecorations="Underline" HorizontalAlignment="Center">
+                    Margin="5,10,5,0"
+                    Width="75" 
+                    Height="30" 
+                    Background="#FF0789E1" 
+                    Foreground="#FFC5B7B7"/>
+            <TextBlock Text="Login" Foreground="#FF97FF80" TextDecorations="Underline" HorizontalAlignment="Center" Margin="5,10,5,0">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseLeftButtonDown">
                     <i:InvokeCommandAction Command="{Binding ShowRegiserCommand}"/>

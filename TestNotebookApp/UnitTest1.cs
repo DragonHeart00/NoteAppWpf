@@ -12,7 +12,7 @@ namespace TestNotebookApp
             double additions = NoteApp.Model.MathLogic.Addition(20,5);
             Assert.Equal("25", additions + "");
 
-            //test addition function
+            //test addition with Multiplication function
             double multiplications = NoteApp.Model.MathLogic.Multiplication(5, 5);
             double admod = additions + multiplications;
             Assert.Equal("50", admod + "");
