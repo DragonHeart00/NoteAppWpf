@@ -8,6 +8,8 @@ namespace TestNotebookApp
         [Fact]
         public void TestCalc()
         {
+
+      
             //test addition function
             double additions = NoteApp.Model.MathLogic.Addition(20,5);
             Assert.Equal("25", additions + "");
@@ -28,7 +30,6 @@ namespace TestNotebookApp
             // 50 + 3 + 7 = 60
             result = additions + multiplications + divisions+ subtractions;
             Assert.Equal("60", result + "");
-
 
         }
 
