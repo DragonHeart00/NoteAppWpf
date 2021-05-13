@@ -82,7 +82,7 @@ namespace NoteApp
 
         private async void SpeechButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult results = MessageBox.Show("you can't upgrade to premium :)", "Acodigo");
+            MessageBoxResult results = MessageBox.Show("You have to upgrade to premium :)", "Acodigo");
             //todo by azure portal need to pay, becuse it is not free, pay as you go 
             /*
             string region = "northeurope";
