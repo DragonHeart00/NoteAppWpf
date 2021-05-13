@@ -1,4 +1,6 @@
-﻿using NoteApp.DB;
+﻿using Microsoft.CognitiveServices.Speech;
+using Microsoft.CognitiveServices.Speech.Audio;
+using NoteApp.DB;
 using NoteApp.View;
 using NoteApp.ViewModel;
 using System;
@@ -78,16 +80,32 @@ namespace NoteApp
             Application.Current.Shutdown();
         }
 
-        private void SpeechButton_Click(object sender, RoutedEventArgs e)
+        private async void SpeechButton_Click(object sender, RoutedEventArgs e)
         {
-            //todo by azure portal
+            MessageBoxResult results = MessageBox.Show("you can't upgrade to premium :)", "Acodigo");
+            //todo by azure portal need to pay, becuse it is not free, pay as you go 
+            /*
+            string region = "northeurope";
+            string key = "02e2dd4918e5496ca239c05b69f4035b";
+
+            var speechConfig = SpeechConfig.FromSubscription(key, region);
+
+            using (var audioConfig = AudioConfig.FromDefaultMicrophoneInput())
+            {
+                using (var recognizer = new SpeechRecognizer(speechConfig, audioConfig))
+                {
+                    var result = await recognizer.RecognizeOnceAsync();
+                    contentRichTextBox.Document.Blocks.Add(new Paragraph(new Run(result.Text)));
+                }
+            }
+            */
         }
 
    
         private void contentRichTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            int ammountCharacters = (new TextRange(contentRichTextBox.Document.ContentStart, contentRichTextBox.Document.ContentEnd)).Text.Length;
-            statusTextBox.Text = $"Document length: {ammountCharacters} characters";
+            int amountOfCharacters = (new TextRange(contentRichTextBox.Document.ContentStart, contentRichTextBox.Document.ContentEnd)).Text.Length;
+            statusTextBox.Text = $"Document length: {amountOfCharacters} characters.";
         }
 
         private void blodButton_Click(object sender, RoutedEventArgs e)
